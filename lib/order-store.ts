@@ -23,6 +23,12 @@ function client() {
   return google.sheets({ version: "v4", auth });
 }
 
+function storedNumber(value: unknown) {
+  if (typeof value === "number") return Number.isFinite(value) ? value : 0;
+  const parsed = Number(String(value ?? "").replace(/[^0-9.-]/g, ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 export async function ensureOrdersSheet() {
   if (!sheetSetup) sheetSetup = setupOrdersSheet().catch((error) => { sheetSetup = null; throw error; });
   return sheetSetup;
@@ -83,12 +89,16 @@ async function setupOrdersSheet() {
 async function findOrderEntry(orderId: string): Promise<{ record: StoredOrder; rowNumber: number } | null> {
   await ensureOrdersSheet();
   const { spreadsheetId, tab } = settings();
-  const result = await client().spreadsheets.values.get({ spreadsheetId, range: `'${tab.replaceAll("'", "''")}'!A2:Q` });
+  const result = await client().spreadsheets.values.get({
+    spreadsheetId,
+    range: `'${tab.replaceAll("'", "''")}'!A2:Q`,
+    valueRenderOption: "UNFORMATTED_VALUE",
+  });
   const rows = result.data.values || [];
   const rowIndex = rows.findIndex((values) => values[0] === orderId);
   if (rowIndex < 0) return null;
   const row = rows[rowIndex];
-  return { rowNumber: rowIndex + 2, record: { orderId: row[0], dateTime: row[1], productName: row[6], productSlug: row[7], quantity: Number(row[8]), pricePerPiece: Number(row[9]), subtotal: Number(row[10]), deliveryFee: Number(row[11]), totalPrice: Number(row[12]), paymentMethod: row[13], status: row[14], notificationStatus: row[16] || "Not confirmed" } };
+  return { rowNumber: rowIndex + 2, record: { orderId: String(row[0]), dateTime: String(row[1]), productName: String(row[6]), productSlug: String(row[7]), quantity: storedNumber(row[8]), pricePerPiece: storedNumber(row[9]), subtotal: storedNumber(row[10]), deliveryFee: storedNumber(row[11]), totalPrice: storedNumber(row[12]), paymentMethod: String(row[13]), status: String(row[14]), notificationStatus: String(row[16] || "Not confirmed") } };
 }
 
 export async function findOrderById(orderId: string): Promise<StoredOrder | null> {
