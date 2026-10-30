@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --font-manrope: "Manrope Variable";
+}
+.dark { color-scheme: dark; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+body { min-height: 100vh; overflow-x: clip; }
+
+::selection { background: #d4b477; color: #151411; }
+
+@layer components {
+  .shell { @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-10; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-gold dark:text-champagne; }
+  .display { @apply font-serif text-[clamp(2.75rem,8vw,4.5rem)] font-semibold leading-[0.94] tracking-[-0.035em]; }
+  .section-title { @apply font-serif text-[clamp(2.25rem,6vw,3rem)] font-semibold leading-[1.02] tracking-[-0.025em]; }
+  .btn-primary { @apply inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 dark:bg-champagne dark:text-ink dark:hover:bg-white; }
+  .btn-secondary { @apply inline-flex min-h-12 items-center justify-center rounded-full border border-black/15 px-6 py-3 text-center text-sm font-semibold transition hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold dark:border-white/20 dark:hover:border-champagne dark:hover:text-champagne; }
+  .glass { @apply border border-black/10 bg-white/65 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.045]; }
+  .field { @apply min-h-12 w-full scroll-mt-28 rounded-2xl border border-black/15 bg-white/80 px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-black/40 focus:border-gold focus:ring-2 focus:ring-gold/20 dark:border-white/15 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-white/35 sm:text-sm; }
+}
+
+.watch-halo::before {
+  content: "";
+  position: absolute;
+  inset: 12% 8%;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(212,180,119,.45), rgba(181,138,70,.09) 48%, transparent 70%);
+  filter: blur(24px);
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .14;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
