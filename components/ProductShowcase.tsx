@@ -15,12 +15,19 @@ export function ProductShowcase({ product }: { product: Product }) {
   const activeImage = product.images[imageIndex] ?? product.images[0];
   const checkout = `/checkout?product=${encodeURIComponent(product.slug)}&quantity=${quantity}`;
 
+  const selectImage = (index: number) => {
+    const total = product.images.length;
+    setImageIndex((index + total) % total);
+  };
+
   useEffect(() => {
     if (!zoomed) return;
     previousFocus.current = document.activeElement as HTMLElement;
     closeButton.current?.focus();
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setZoomed(false);
+      if (event.key === "ArrowLeft") selectImage(imageIndex - 1);
+      if (event.key === "ArrowRight") selectImage(imageIndex + 1);
       if (event.key === "Tab" && dialog.current) {
         const focusable = [...dialog.current.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')];
         const first = focusable[0];
@@ -32,18 +39,26 @@ export function ProductShowcase({ product }: { product: Product }) {
     window.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
     return () => { window.removeEventListener("keydown", handleKeyDown); document.body.style.overflow = ""; previousFocus.current?.focus(); };
-  }, [zoomed]);
+  }, [imageIndex, zoomed]);
 
   return (
     <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,.92fr)] lg:gap-12 xl:gap-14">
-      <div className="min-w-0">
-        <button type="button" onClick={() => setZoomed(true)} className="relative mx-auto block aspect-square w-full max-w-[680px] overflow-hidden rounded-3xl bg-[#ece9e2] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:rounded-[2rem] dark:bg-[#1b1b18]" aria-label={`Enlarge image of ${product.name}`}>
-          <Image src={activeImage.src} alt={activeImage.alt} fill priority sizes="(max-width: 1023px) calc(100vw - 32px), 52vw" className="object-contain p-2" />
-          <span className="absolute bottom-4 right-4 rounded-full bg-white/90 px-3 py-2 text-[11px] font-semibold text-ink shadow-sm">View larger</span>
-        </button>
-        <div className="mt-3 flex gap-3 overflow-x-auto pb-2" aria-label="Product image gallery">
-          {product.images.map((image, index) => <button key={image.src} type="button" onClick={() => setImageIndex(index)} aria-label={`View image ${index + 1} of ${product.name}`} aria-current={index === imageIndex} className={`relative size-20 shrink-0 overflow-hidden rounded-2xl border bg-[#ece9e2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold dark:bg-[#1b1b18] ${index === imageIndex ? "border-gold" : "border-black/10 dark:border-white/10"}`}><Image src={image.src} alt="" fill sizes="80px" className="object-contain p-1" /></button>)}
+      <div className="min-w-0 lg:grid lg:grid-cols-[88px_minmax(0,1fr)] lg:gap-4 xl:grid-cols-[104px_minmax(0,1fr)]">
+        <div className="order-2 mt-3 flex snap-x gap-3 overflow-x-auto pb-2 lg:order-1 lg:mt-0 lg:flex-col lg:overflow-visible lg:pb-0" aria-label="Product image gallery">
+          {product.images.map((image, index) => (
+            <button key={image.src} type="button" onClick={() => selectImage(index)} aria-label={`Show view ${index + 1} of ${product.name}`} aria-current={index === imageIndex ? "true" : undefined} className={`group relative aspect-square w-[76px] shrink-0 snap-start overflow-hidden rounded-2xl border-2 bg-[#e7e0d5] transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 sm:w-20 lg:w-full dark:bg-[#1b1b18] dark:focus-visible:ring-offset-ink ${index === imageIndex ? "border-gold shadow-[0_8px_28px_rgba(181,138,70,.2)]" : "border-transparent opacity-70 hover:border-gold/45 hover:opacity-100"}`}>
+              <Image src={image.src} alt="" fill sizes="(max-width: 1023px) 80px, 104px" className="object-contain p-1.5 transition duration-300 group-hover:scale-[1.03]" />
+              <span className={`absolute inset-x-3 bottom-1 h-0.5 rounded-full bg-gold transition-opacity ${index === imageIndex ? "opacity-100" : "opacity-0"}`} />
+            </button>
+          ))}
         </div>
+
+        <button type="button" onClick={() => setZoomed(true)} className="group relative order-1 mx-auto block aspect-[4/3] w-full max-w-[680px] overflow-hidden rounded-3xl bg-[#e7e0d5] text-left shadow-[0_24px_70px_rgba(33,24,13,.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:rounded-[2rem] lg:order-2 dark:bg-[#1b1b18]" aria-label={`Open larger view of ${activeImage.alt}`}>
+          <Image key={activeImage.src} src={activeImage.src} alt={activeImage.alt} fill priority={imageIndex === 0} sizes="(max-width: 1023px) calc(100vw - 32px), 48vw" className="gallery-image-enter object-contain p-2 sm:p-3" />
+          <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/[.06] dark:ring-white/10" />
+          <span className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-2 text-[11px] font-semibold text-ink shadow-sm backdrop-blur transition group-hover:-translate-y-0.5"><span aria-hidden="true" className="text-base leading-none">⌕</span> View larger</span>
+          <span className="absolute left-4 top-4 rounded-full bg-ink/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.14em] text-champagne backdrop-blur">{imageIndex + 1} / {product.images.length}</span>
+        </button>
       </div>
 
       <div className="flex min-w-0 flex-col justify-center lg:py-6">
@@ -61,7 +76,7 @@ export function ProductShowcase({ product }: { product: Product }) {
         <dl className="mt-7 divide-y divide-black/10 border-y border-black/10 text-sm dark:divide-white/10 dark:border-white/10">{product.specifications.map((item) => <div key={item.label} className="grid gap-1 py-4 sm:grid-cols-[140px_1fr]"><dt className="text-black/45 dark:text-white/45">{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
       </div>
 
-      {zoomed && <div ref={dialog} className="fixed inset-0 z-[90] grid place-items-center bg-black/85 p-4" role="dialog" aria-modal="true" aria-label={`Enlarged image of ${product.name}`} onMouseDown={(event) => { if (event.currentTarget === event.target) setZoomed(false); }}><div className="relative h-[85vh] w-full max-w-5xl"><Image src={activeImage.src} alt={activeImage.alt} fill sizes="100vw" className="object-contain" /><button ref={closeButton} type="button" onClick={() => setZoomed(false)} className="absolute right-0 top-0 grid size-12 place-items-center rounded-full bg-white text-2xl text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold" aria-label="Close enlarged image">×</button></div></div>}
+      {zoomed && <div ref={dialog} className="fixed inset-0 z-[90] grid place-items-center bg-black/90 p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-label={`Enlarged image of ${product.name}`} onMouseDown={(event) => { if (event.currentTarget === event.target) setZoomed(false); }}><div className="relative h-[88vh] w-full max-w-6xl"><Image key={activeImage.src} src={activeImage.src} alt={activeImage.alt} fill sizes="100vw" className="gallery-image-enter object-contain" /><button ref={closeButton} type="button" onClick={() => setZoomed(false)} className="absolute right-1 top-1 grid size-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold" aria-label="Close enlarged image">×</button>{product.images.length > 1 && <><button type="button" onClick={() => selectImage(imageIndex - 1)} className="absolute left-1 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-2xl text-ink shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:left-3" aria-label="Show previous image">‹</button><button type="button" onClick={() => selectImage(imageIndex + 1)} className="absolute right-1 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-2xl text-ink shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:right-3" aria-label="Show next image">›</button></>}<p className="absolute inset-x-0 bottom-2 text-center text-xs font-semibold tracking-wide text-white/75">View {imageIndex + 1} of {product.images.length}</p></div></div>}
     </div>
   );
 }

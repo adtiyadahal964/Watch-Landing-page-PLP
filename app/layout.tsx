@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: { default: "Emerald Classic | HIMA Watches", template: "%s | HIMA Watches" },
   description: "Discover the HIMA Watches Emerald Classic, available for NPR 3,999 with Cash on Delivery across Nepal.",
   keywords: ["Emerald Classic watch", "HIMA Watches", "watch in Nepal", "Cash on Delivery watch"],
-  openGraph: { type: "website", siteName: "HIMA Watches", title: "Emerald Classic | HIMA Watches", description: "A green-dial classic with gold-tone details and a brown strap, available for NPR 3,999.", images: [{ url: "/images/emerald-classic.webp", alt: "HIMA Watches Emerald Classic" }] },
+  openGraph: { type: "website", siteName: "HIMA Watches", title: "Emerald Classic | HIMA Watches", description: "A green-dial classic with gold-tone details and a brown strap, available for NPR 3,999.", images: [{ url: "/images/emerald-classic-gallery/emerald-classic-front.png", alt: "HIMA Watches Emerald Classic" }] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

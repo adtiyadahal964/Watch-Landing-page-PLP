@@ -22,9 +22,10 @@ export const emeraldClassic: Product = {
   category: "Classic",
   price: 3999,
   images: [
-    { src: "/images/emerald-classic.webp", alt: "Emerald Classic watch with a green dial, gold-tone case and brown strap" },
-    { src: "/images/emerald-classic-dial.webp", alt: "Close view of the Emerald Classic green dial and gold-tone details" },
-    { src: "/images/emerald-classic-profile.webp", alt: "Full portrait view of the Emerald Classic watch and brown strap" },
+    { src: "/images/emerald-classic-gallery/emerald-classic-front.png", alt: "Front presentation of the Emerald Classic HIMA watch" },
+    { src: "/images/emerald-classic-gallery/emerald-classic-angle.png", alt: "Angled presentation of the Emerald Classic HIMA watch" },
+    { src: "/images/emerald-classic-gallery/emerald-classic-portrait.png", alt: "Full portrait presentation of the Emerald Classic HIMA watch" },
+    { src: "/images/emerald-classic-gallery/emerald-classic-rear.png", alt: "Rear view of the Emerald Classic HIMA watch and strap" },
   ],
   description: "A rich green dial, warm gold-tone details and a deep brown strap come together in an elegant watch designed to complement everyday and occasion dressing.",
   benefits: [
