@@ -54,15 +54,15 @@ export default function Home() {
             </dl>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[720px] lg:min-h-[650px]">
+          <div className="relative mx-auto w-full max-w-[720px] py-5 sm:py-8 lg:py-12">
             <div className="absolute left-1/2 top-1/2 aspect-square w-[84%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-champagne/18" />
             <div className="absolute left-1/2 top-1/2 aspect-square w-[62%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-champagne/20" />
             <div className="absolute left-1/2 top-1/2 aspect-square w-[42%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/15 blur-3xl" />
-            <div className="relative aspect-square overflow-hidden rounded-[2rem] bg-[#eceeea] shadow-[0_45px_120px_rgba(0,0,0,.5)] sm:rounded-[3rem] lg:absolute lg:inset-y-8 lg:right-0 lg:w-[92%]">
-              <Image src={emeraldClassic.images[0].src} alt={emeraldClassic.images[0].alt} fill priority sizes="(max-width: 1023px) calc(100vw - 32px), 55vw" className="object-contain" />
+            <div style={{ aspectRatio: `${emeraldClassic.images[0].width}/${emeraldClassic.images[0].height}` }} className="relative ml-auto w-[96%] rotate-[1.2deg] overflow-hidden rounded-[2rem] bg-[#17130f] shadow-[0_45px_120px_rgba(0,0,0,.5)] ring-1 ring-white/15 transition-transform duration-500 hover:rotate-[.4deg] sm:w-[94%] sm:rounded-[3rem]">
+              <Image src={emeraldClassic.images[0].src} alt={emeraldClassic.images[0].alt} fill priority sizes="(max-width: 1023px) calc(100vw - 40px), 55vw" className="object-contain" />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/15" />
             </div>
-            <p className="absolute bottom-5 left-5 rounded-full bg-ink/85 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.18em] text-champagne backdrop-blur sm:bottom-9 sm:left-9">One watch. One considered choice.</p>
+            <p className="absolute bottom-2 left-2 rounded-full bg-ink/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[.18em] text-champagne backdrop-blur sm:bottom-5 sm:left-5">One watch. One considered choice.</p>
           </div>
         </div>
       </section>
@@ -94,7 +94,7 @@ export default function Home() {
         <div className="pointer-events-none absolute -right-32 top-12 size-[520px] rounded-full border border-champagne/15"><div className="absolute inset-[18%] rounded-full border border-champagne/15" /><div className="absolute inset-[36%] rounded-full border border-champagne/15" /></div>
         <div className="shell relative">
           <div className="grid gap-10 lg:grid-cols-[.86fr_1.14fr] lg:items-center lg:gap-16">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-[#17130f] shadow-2xl sm:rounded-[3rem]"><Image src={emeraldClassic.images[2].src} alt={emeraldClassic.images[2].alt} fill sizes="(max-width: 1023px) calc(100vw - 32px), 42vw" className="object-contain" /></div>
+            <div style={{ aspectRatio: `${emeraldClassic.images[2].width}/${emeraldClassic.images[2].height}` }} className="relative overflow-hidden rounded-[2rem] bg-[#17130f] shadow-2xl sm:rounded-[3rem]"><Image src={emeraldClassic.images[2].src} alt={emeraldClassic.images[2].alt} fill sizes="(max-width: 1023px) calc(100vw - 32px), 42vw" className="object-contain" /></div>
             <div><p className="eyebrow !text-champagne">Visual details</p><h2 className="section-title mt-5 max-w-xl">Three tones.<br />One distinct presence.</h2><div className="mt-10 divide-y divide-white/15 border-y border-white/15">{[["01","Emerald dial","The rich green face creates the watch’s defining visual character."],["02","Warm contrast","Gold-tone details give the green dial a refined, luminous counterpoint."],["03","Grounded finish","The deep brown strap brings warmth and makes the palette easy to coordinate."]].map(([number,title,body])=><article key={number} className="grid gap-4 py-6 sm:grid-cols-[56px_1fr] sm:py-7"><span className="font-serif text-2xl text-champagne">{number}</span><div><h3 className="font-serif text-2xl font-semibold">{title}</h3><p className="mt-2 max-w-lg text-sm leading-6 text-white/58">{body}</p></div></article>)}</div></div>
           </div>
         </div>

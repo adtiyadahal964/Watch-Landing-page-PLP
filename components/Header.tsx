@@ -27,9 +27,9 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-[60] border-b border-black/5 bg-ivory/90 backdrop-blur-xl dark:border-white/10 dark:bg-[#11110f]/90">
       <div className="shell flex h-20 items-center justify-between gap-3">
-        <BrandLogo className="h-14 w-auto sm:h-16" priority />
+        <BrandLogo className="h-11 w-auto sm:h-12" priority />
 
-        <nav className="hidden items-center gap-6 text-sm font-medium md:flex lg:gap-8" aria-label="Main navigation">
+        <nav className="hidden items-center gap-6 text-[12px] font-bold uppercase tracking-[0.11em] md:flex lg:gap-8" aria-label="Main navigation">
           {navigation.map((item) => (
             <Link key={item.href} href={item.href} className="rounded-md px-1 py-2 transition hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold">
               {item.label}

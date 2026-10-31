@@ -16,7 +16,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "ui-sans-serif", "system-ui", "sans-serif"],
-        serif: ["var(--font-manrope)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["Georgia", "Cambria", '"Times New Roman"', "serif"],
       },
       boxShadow: {
         glow: "0 24px 80px rgba(181, 138, 70, 0.18)",

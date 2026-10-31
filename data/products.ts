@@ -1,4 +1,4 @@
-export type ProductImage = { src: string; alt: string };
+export type ProductImage = { src: string; alt: string; width?: number; height?: number };
 
 export type Product = {
   slug: string;
@@ -22,10 +22,9 @@ export const emeraldClassic: Product = {
   category: "Classic",
   price: 3999,
   images: [
-    { src: "/images/emerald-classic-gallery/emerald-classic-front.png", alt: "Front presentation of the Emerald Classic HIMA watch" },
-    { src: "/images/emerald-classic-gallery/emerald-classic-angle.png", alt: "Angled presentation of the Emerald Classic HIMA watch" },
-    { src: "/images/emerald-classic-gallery/emerald-classic-portrait.png", alt: "Full portrait presentation of the Emerald Classic HIMA watch" },
-    { src: "/images/emerald-classic-gallery/emerald-classic-rear.png", alt: "Rear view of the Emerald Classic HIMA watch and strap" },
+    { src: "/images/emerald-classic-gallery/emerald-classic-front.png", alt: "Front presentation of the Emerald Classic HIMA watch", width: 1448, height: 1086 },
+    { src: "/images/emerald-classic-gallery/emerald-classic-angle.png", alt: "Angled presentation of the Emerald Classic HIMA watch", width: 769, height: 546 },
+    { src: "/images/emerald-classic-gallery/emerald-classic-portrait.png", alt: "Full portrait presentation of the Emerald Classic HIMA watch", width: 769, height: 1024 },
   ],
   description: "A rich green dial, warm gold-tone details and a deep brown strap come together in an elegant watch designed to complement everyday and occasion dressing.",
   benefits: [

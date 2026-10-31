@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-ivory text-ink antialiased dark:bg-[#11110f] dark:text-[#f7f2e8]">
+      <body className="bg-ivory font-sans text-[15px] leading-relaxed text-ink antialiased dark:bg-[#11110f] dark:text-[#f7f2e8]">
         <script
           dangerouslySetInnerHTML={{
             __html: `try{if(localStorage.theme==='dark'||(!('theme' in localStorage)&&matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}`,

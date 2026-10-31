@@ -27,11 +27,11 @@ body { min-height: 100vh; overflow-x: clip; }
 
 @layer components {
   .shell { @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-10; }
-  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-gold dark:text-champagne; }
-  .display { @apply font-serif text-[clamp(2.75rem,8vw,4.5rem)] font-semibold leading-[0.94] tracking-[-0.035em]; }
-  .section-title { @apply font-serif text-[clamp(2.25rem,6vw,3rem)] font-semibold leading-[1.02] tracking-[-0.025em]; }
-  .btn-primary { @apply inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 dark:bg-champagne dark:text-ink dark:hover:bg-white; }
-  .btn-secondary { @apply inline-flex min-h-12 items-center justify-center rounded-full border border-black/15 px-6 py-3 text-center text-sm font-semibold transition hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold dark:border-white/20 dark:hover:border-champagne dark:hover:text-champagne; }
+  .eyebrow { @apply text-[10px] font-bold uppercase tracking-[0.26em] text-gold dark:text-champagne sm:text-[11px]; }
+  .display { @apply font-serif text-[clamp(2.75rem,8vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.045em]; }
+  .section-title { @apply font-serif text-[clamp(2.1rem,5.5vw,3.25rem)] font-medium leading-[1.04] tracking-[-0.035em]; }
+  .btn-primary { @apply inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 py-3 text-center text-[13px] font-bold tracking-[0.015em] text-white transition hover:-translate-y-0.5 hover:bg-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 dark:bg-champagne dark:text-ink dark:hover:bg-white; }
+  .btn-secondary { @apply inline-flex min-h-12 items-center justify-center rounded-full border border-black/15 px-6 py-3 text-center text-[13px] font-bold tracking-[0.015em] transition hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold dark:border-white/20 dark:hover:border-champagne dark:hover:text-champagne; }
   .glass { @apply border border-black/10 bg-white/65 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.045]; }
   .field { @apply min-h-12 w-full scroll-mt-28 rounded-2xl border border-black/15 bg-white/80 px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-black/40 focus:border-gold focus:ring-2 focus:ring-gold/20 dark:border-white/15 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-white/35 sm:text-sm; }
 }
